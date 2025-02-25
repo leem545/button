@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Type</title>
+    <style>
+        body{
+            background-color: rgb(255, 244, 200);
+            display: flex; /* FLEXBOX 적용 */
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0;
+            
+        }
+        p{
+            color:#5b4a25;
+        }
+
+        /* STYLE FOR THE INPUT FIELD */
+        #charInput {
+            background-color: #ffffff; 
+            border-radius: 8px;
+            border: 2px solid #6d7874;
+            color: rgb(0, 0, 0);
+            padding: 10px 25px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        /* STYLE FOR THE SUBMIT BUTTON */
+        #submitButton {
+            background-color: #ac986e; 
+            border-radius: 8px;
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 10px;
+            margin-bottom: 15px;
+
+        }
+
+        /* STYLE FOR THE IMAGE */
+        #displayedImage {
+            display: none; /* This line is mandatory */
+            width: 40%; 
+            margin-top: 10;
+
+        }
+
+    </style>
+</head>
+<body>
+    <p>Type Any letter</p>
+    
+    <!-- INPUT FIELD FOR 1 CHARACTER -->
+    <input type="text" id="charInput" maxlength="1">
+
+    <!-- BUTTON TO DISPLAY IMAGE -->
+    <button onclick="displayImage()" id="submitButton">Show Image</button>
+
+    <!-- IMAGE TO DISPLAY -->
+    <img id="displayedImage" src="" alt="Displayed Image">
+
+
+    <!-- Image Display Script Below -->
+    <script>
+        // Array of images
+        // DIRECTIONS: UPDATE THE URLS WITH THE RELATIVE LINKS OF YOUR IMAGES
+        const images = [
+            "https://images.pexels.com/photos/206959/pexels-photo-206959.jpeg", //A
+            "https://hips.hearstapps.com/hmg-prod/images/bananas-royalty-free-image-1702061943.jpg", //B
+            "https://www.papayapet.com/wp-content/uploads/2023/07/signs-of-an-old-cat-header_23614-1.jpg", //C
+            "https://www.princeton.edu/sites/default/files/styles/1x_full_2x_half_crop/public/images/2022/02/KOA_Nassau_2697x1517.jpg?itok=Bg2K7j7J", //D
+            "https://cms.bbcearth.com//sites/default/files/factfiles/2024-07/el2.jpg", //E
+            "https://images.unsplash.com/photo-1474511320723-9a56873867b5?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Zm94fGVufDB8fDB8fHww", //F
+            "https://contenthub-static.grammarly.com/blog/wp-content/uploads/2016/08/BMD-4477.png", //G
+            "https://images.unsplash.com/photo-1633989464081-16ccd31287a1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTc3M3wwfDF8c2VhcmNofDE0fHxoZWxsb3xlbnwwfHx8fDE2NTk0MDQ5NTQ&ixlib=rb-1.2.1&q=80&w=2000", //H
+            "https://www.washingtonpost.com/graphics/2019/voraciously/how-to-make-ice-cream/img/icecream-videostill.jpg", //I
+            "https://www.furycat.com/images/jet-ski-tour.jpg", //J
+            "https://usnannyinstitute.com/wp-content/uploads/2019/07/6f0e0e475f3e49b08431b97c22de4f32.jpg", //K
+            "https://cdn.britannica.com/84/188484-050-F27B0049/lemons-tree.jpg", //L
+            "https://heartofenglandforest.org/sites/default/files/styles/1200widthonly/public/2021-03/Wood%20mouse_0.jpg?itok=Nxc374Ty", //M
+            "https://nypost.com/wp-content/uploads/sites/2/2017/03/170317-nose-shape-climate-feature.jpg?quality=75&strip=all&w=1200", //N
+            "https://chefsmandala.com/wp-content/uploads/2018/03/Onion-Red.jpg", //O
+            "https://media.post.rvohealth.io/wp-content/uploads/2019/10/pineapple-fruit-1200x628-facebook.jpg", //P
+            "https://variety.com/wp-content/uploads/2022/09/GettyImages-515984032-1.jpg?w=1000&h=563&crop=1", //Q
+            "https://www.brilliance.com/cdn-cgi/image/f=webp,width=1440,height=1440,quality=90/sites/default/files/vue/collections/engagement-rings-diamond_og.jpg", //R
+            "https://www.directivegroup.com/wp-content/uploads/2017/03/smile-9047-9380-hd-wallpapers-1.jpg", //S
+            "https://via.placeholder.com/300/FF00FF/FFFFFF?text=T", //T
+            "https://via.placeholder.com/300/FF00FF/FFFFFF?text=U", //U
+            "https://via.placeholder.com/300/FF00FF/FFFFFF?text=V", //V
+            "https://via.placeholder.com/300/FF00FF/FFFFFF?text=W", //W
+            "https://via.placeholder.com/300/FF00FF/FFFFFF?text=X", //X
+            "https://via.placeholder.com/300/FF00FF/FFFFFF?text=Y", //Y
+            "https://via.placeholder.com/300/FF00FF/FFFFFF?text=Z"  //Z
+        ];
+
+        function displayImage() {
+            const input = document.getElementById("charInput").value.toUpperCase();
+            const imgElement = document.getElementById("displayedImage");
+            
+            // Assign an image based on character (A-Z)
+            const index = input.charCodeAt(0) - 65; // 'A' is 65 in ASCII
+            if (index >= 0 && index < images.length) {
+                imgElement.src = images[index];
+                imgElement.style.display = "block";
+            } else {
+                /* 
+                alert("Please enter a letter between A and Z.");
+                imgElement.style.display = "none";
+                */
+
+                // IF INVALID INPUT IS ENTERED, DISPLAY ALTERNATE IMAGE
+                imgElement.src = "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExcmtkdnJhMXY4Njd1cXR3MTM3MW1nMzZ1NXNhNHlhOHA0MWF2dDUzdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/13dRJkj5wgKq9q/giphy.gif"
+                imgElement.style.display = "block";
+            }
+        }
+    </script>
+
+</body>
+</html>
